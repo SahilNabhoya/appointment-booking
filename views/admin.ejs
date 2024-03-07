@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%-include('../src/components/head');%>
+        <title><%= title%></title>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h2 class="mb-4">Admin - Booked Appointments</h2>
+
+            <!-- Appointments Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Appointment ID</th>
+                            <th scope="col">Patient Name</th>
+                            <th scope="col">Doctor</th>
+                            <th scope="col">Appointment Time</th>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>Dr. Jane Smith</td>
+                            <td>Morning</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Doe</td>
+                            <td>Dr. John Johnson</td>
+                            <td>Afternoon</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Bob Johnson</td>
+                            <td>Dr. Emily Davis</td>
+                            <td>Evening</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

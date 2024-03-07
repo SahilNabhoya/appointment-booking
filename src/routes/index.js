@@ -1,38 +1,40 @@
 const router = require('express').Router();
 
-router.get('/', (req,res)=>{
-    res.render('home', {
-        title : 'Home Page'
+router.get('/', (req, res) => {
+    res.set('Content-Type', 'text/css');
+    res.render('home.ejs', {
+        title: 'Home Page.ejs'
     });
 });
 
-router.get('/home', (req,res)=>{
-    res.render('home', {
-        title : 'Home'
+router.get('/home', (req, res) => {
+    res.set('Content-Type', 'text/css');
+    res.render('home.ejs', {
+        title: 'Home'
     });
 });
 
-router.get('/login', (req,res)=>{
+router.get('/login', (req, res) => {
     res.render('login', {
-        title : 'Login'
+        title: 'Login'
     });
 });
 
-router.get('/booking', (req,res)=>{
+router.get('/booking', (req, res) => {
     res.render('booking', {
-        title : 'Book Appointment'
+        title: 'Book Appointment'
     });
 });
 
-router.get('/appointment', (req,res)=>{
-    res.render('appointments', {
-        title : 'Appointment'
+router.get('/appointment', (req, res) => {
+    res.render('appointment', {
+        title: 'Appointment'
     });
 });
 
-router.get('/admin', (req,res)=>{
+router.get('/admin', (req, res) => {
     res.render('admin', {
-        title : 'Apdmin'
+        title: 'Apdmin'
     });
 });
 

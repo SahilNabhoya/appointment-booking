@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../src/components/head');%>
+        <title><%= title%></title>
+        <link rel="stylesheet" href="../src/pages/CSS/home.css" />
+    </head>
+    <body>
+        <div id="page">
+            <%- include('../src/components/nav')%>
+
+            <!-- LOGIN MODEL -->
+
+            <!-- Modal -->
+            <!-- <div
+                class="modal fade"
+                id="staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">
+                                Log In
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="username"
+                                        placeholder="Enter your username"
+                                        required
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        id="password"
+                                        placeholder="Enter your password"
+                                        required
+                                    />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="w-100">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- END OF THE MODEL -->
+            <div class="home">
+                <img
+                    class="image-fluid w-100"
+                    src="../src/pages/Images/1366x522-7.jpg"
+                    alt="Excercise"
+                />
+                <div class="deceleration">
+                    <div>HEALTH CARE SOLUTION</div>
+                    <h1>YOUR MOST TRUSTED<br />HEALTH PARTNER</h1>
+                    <button type="submit" class="btn btn-get-started">
+                        Get Started Now!
+                    </button>
+                </div>
+            </div>
+            <div class="cards p-5 text-center">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card-1 active d-flex flex-column h-100">
+                            <div class="card-body">
+                                <h1>Why Choose Us?</h1>
+                                <p class="text-break">
+                                    Lorem ipsum dolor, sit amet consectetur
+                                    adipisicing elit. Explicabo non, tempore
+                                    quaerat, dolorem fugiat eligendi vero rem
+                                    reiciendis placeat asperiores, hic excepturi
+                                    obcaecati! Vitae sunt dolorum accusamus
+                                    amet. Aperiam, perspiciatis!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card d-flex flex-column h-100">
+                            <div class="card-body">
+                                <i class="fa-solid fa-house-user fs-1 py-3"></i>
+                                <h3>Appointment</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Sit porro, animi, vitae
+                                    iusto accusamus provident temporibus debitis
+                                    pariatur exercitationem perspiciatis nam eum
+                                    nostrum. Placeat modi amet expedita
+                                    accusantium eius tempore?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card d-flex flex-column h-100">
+                            <div class="card-body">
+                                <i class="fa-solid fa-headset fs-1 py-3"></i>
+                                <h3>Emergency Cases</h3>
+                                <p>
+                                    <span class="d-block fw-bold"
+                                        >+91 8160706074</span
+                                    >
+                                    Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Sit porro, animi, vitae
+                                    iusto accusamus provident temporibus debitis
+                                    pariatur exercitationem perspiciatis nam eum
+                                    nostrum. Placeat modi amet expedita
+                                    accusantium eius tempore?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card d-flex flex-column h-100">
+                            <div class="card-body">
+                                <i class="fa-solid fa-clock fs-1 py-3"></i>
+                                <h3>Working Hours</h3>
+                                <small> Timing Schedule</small>
+                                <ul class="list-group px-5">
+                                    <li
+                                        class="list-group-item d-flex justify-content-between"
+                                    >
+                                        <p>Sun-Wed:</p>
+                                        <p>8:00-17:00</p>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex justify-content-between"
+                                    >
+                                        <p>Thus-Fri:</p>
+                                        <p>9:00-17:00</p>
+                                    </li>
+                                    <li
+                                        class="list-group-item d-flex justify-content-between"
+                                    >
+                                        <p>Sat-Sun:</p>
+                                        <p>10:00-17:00</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
