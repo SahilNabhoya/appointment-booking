@@ -1,14 +1,13 @@
 const router = require('express').Router();
 
+
 router.get('/', (req, res) => {
-    res.set('Content-Type', 'text/css');
     res.render('home.ejs', {
-        title: 'Home Page.ejs'
+        title: 'Home Page'
     });
 });
 
 router.get('/home', (req, res) => {
-    res.set('Content-Type', 'text/css');
     res.render('home.ejs', {
         title: 'Home'
     });
