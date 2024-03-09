@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../src/components/head'); %>
+        <link rel="stylesheet" href="../stylesheets/doctors.css">
+        <title>
+            <%= title %>
+        </title>
+</head>
+
+<body>
+    <%- include('../src/components/nav')%>
+        <div class="doctors-page">
+            <div class="container">
+                <h1>Our Doctors</h1>
+                <div class="doctor">
+                    <img src="/public/images/doctor1.jpg" alt="Doctor 1">
+                    <h2>Dr. John Doe</h2>
+                    <p>Specialty: Cardiology</p>
+                    <p>Experience: 10 years</p>
+                </div>
+                <div class="doctor">
+                    <img src="/public/images/doctor2.jpg" alt="Doctor 2">
+                    <h2>Dr. Jane Smith</h2>
+                    <p>Specialty: Pediatrics</p>
+                    <p>Experience: 8 years</p>
+                </div>
+                <div class="doctor">
+                    <img src="/public/images/doctor3.jpg" alt="Doctor 3">
+                    <h2>Dr. Michael Johnson</h2>
+                    <p>Specialty: Orthopedics</p>
+                    <p>Experience: 12 years</p>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
