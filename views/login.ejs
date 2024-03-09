@@ -2,10 +2,13 @@
 <html lang="en">
     <head>
         <%-include('../src/components/head');%>
-        <title><%= title%></title>
-        <%- include('../public/css/booking')%>
+        <link rel="stylesheet" href="../stylesheets/login.css">
+        <title>
+            <%= title%>
+        </title>
     </head>
     <body>
+        <%- include('../src/components/nav')%>
         <div class="container mt-5">
             <h2 class="mb-4 text-center">Doctor Login</h2>
 

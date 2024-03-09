@@ -2,13 +2,13 @@ const router = require('express').Router();
 
 
 router.get('/', (req, res) => {
-    res.render('home.ejs', {
+    res.render('home', {
         title: 'Home Page'
     });
 });
 
 router.get('/home', (req, res) => {
-    res.render('home.ejs', {
+    res.render('home', {
         title: 'Home'
     });
 });
@@ -28,6 +28,30 @@ router.get('/booking', (req, res) => {
 router.get('/appointment', (req, res) => {
     res.render('appointment', {
         title: 'Appointment'
+    });
+});
+
+router.get('/service', (req, res) => {
+    res.render('service', {
+        title: 'Service'
+    });
+});
+
+router.get('/contact', (req, res) => {
+    res.render('contact', {
+        title: 'Contact'
+    });
+});
+
+router.get('/doctors', (req, res) => {
+    res.render('doctors', {
+        title: 'Doctors'
+    });
+});
+
+router.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About'
     });
 });
 
