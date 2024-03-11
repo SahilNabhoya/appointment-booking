@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router.get('/', (req, res) => {
     res.render('home', {
-        title: 'Home Page'
+        title: 'Home '
     });
 });
 
@@ -57,7 +57,7 @@ router.get('/about', (req, res) => {
 
 router.get('/admin', (req, res) => {
     res.render('admin', {
-        title: 'Apdmin'
+        title: 'Admin'
     });
 });
 
