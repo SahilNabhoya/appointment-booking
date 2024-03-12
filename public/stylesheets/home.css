@@ -1,59 +1,58 @@
+:root {
+    --primary-color: #1977cc;
+}
 
-    :root {
-        --primary-color: #1977cc;
-    }
+#page {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
 
-    #page {
-        width: 100%;
-        height: auto;
-        margin: 0;  
-        padding: 0;
-    }
+.navbar > ul > li > a {
+    text-decoration: none;
+    color: black;
+}
 
-    .navbar>ul>li>a {
-        text-decoration: none;
-        color: black;
-    }
+.navbar > ul > .nav-item:hover {
+    border-bottom: 2px solid var(--primary-color);
+}
 
-    .navbar>ul>.nav-item:hover {
-        border-bottom: 2px solid var(--primary-color);
-    }
+.btn-login {
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
 
-    .btn-login {
-        border: 1px solid var(--primary-color);
-        background-color: var(--primary-color);
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-    }
+.deceleration {
+    position: absolute;
+    top: 300px;
+    left: 100px;
+}
 
-    .deceleration {
-        position: absolute;
-        top: 300px;
-        left: 100px;
-    }
+.btn-get-started {
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    padding: 5px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 20px;
+}
 
-    .btn-get-started {
-        border: 1px solid var(--primary-color);
-        background-color: var(--primary-color);
-        padding: 5px 20px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 20px;
-    }
+/* CARD */
+.card > .card-body > i {
+    color: var(--primary-color);
+}
 
-    /* CARD */
-    .card>.card-body>i {
-        color: var(--primary-color);
-    }
+.card:hover {
+    border: 1px solid #1977cc;
+    border-radius: 10px;
+}
 
-    .card:hover {
-        border: 1px solid #1977cc;
-        border-radius: 10px;
-    }
-
-    .card-1 {
-        background-color: var(--primary-color);
-        color: white;
-    }
+.card-1 {
+    background-color: var(--primary-color);
+    color: white;
+}
