@@ -1,80 +1,91 @@
-const router = require('express').Router();
+const router = require("express").Router();
+const connectDB = require('../db/db.js')
+const User = require('../../src/models/user_model.js')
 
+connectDB()
 
-const mongoose = require('mongoose');
+router.get("/", (req, res) => {
+    res.render("home", {
+        title: "Home ",
+    });
+});
 
-const MONGODB_URL = "mongodb+srv://shineshore1612:Shine_1612@appointment.uyt9hhh.mongodb.net";
-const DB_NAME = "LifrCare";
+router.get("/home", (req, res) => {
+    res.render("home", {
+        title: "Home",
+    });
+});
 
-(async () => {
+router.get("/login", (req, res) => {
+    res.render("login", {
+        title: "Login",
+    });
+});
+
+router.get("/booking", (req, res) => {
+    res.render("booking", {
+        title: "Book Appointment",
+    });
+});
+
+router.get("/appointment", (req, res) => {
+    res.render("appointment", {
+        title: "Appointment",
+    });
+});
+
+router.get("/service", (req, res) => {
+    res.render("service", {
+        title: "Service",
+    });
+});
+
+router.get("/contact", (req, res) => {
+    res.render("contact", {
+        title: "Contact",
+    });
+});
+
+router.get("/doctors", (req, res) => {
+    res.render("doctors", {
+        title: "Doctors",
+    });
+});
+
+router.get("/about", (req, res) => {
+    res.render("about", {
+        title: "About",
+    });
+});
+
+router.get("/admin", (req, res) => {
+    res.render("admin", {
+        title: "Admin",
+    });
+});
+router.get("/signup", (req, res) => {
+    res.render("signup", {
+        title: "Sign Up",
+    });
+});
+router.post("/signup", async (req, res) => {
+  
+    let newUser = new User({
+        name : req.body.name,
+        email : req.body.email,
+        contact : req.body.contact,
+        gender : req.body.gender,
+        age : req.body.age,
+        role : req.body.role,
+
+    });
     try {
-        await mongoose.connect(`${MONGODB_URL}/${DB_NAME}`);
-        console.log('Connected to MongoDB');
+       const user =  await newUser.save();
+        console.log("DataSaved", user);
+        res.redirect('/login')
     } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
+        console.log(error);
     }
-})();
-
-
-router.get('/', (req, res) => {
-    res.render('home', {
-        title: 'Home '
-    });
 });
-
-router.get('/home', (req, res) => {
-    res.render('home', {
-        title: 'Home'
-    });
-});
-
-router.get('/login', (req, res) => {
-    res.render('login', {
-        title: 'Login'
-    });
-});
-
-router.get('/booking', (req, res) => {
-    res.render('booking', {
-        title: 'Book Appointment'
-    });
-});
-
-router.get('/appointment', (req, res) => {
-    res.render('appointment', {
-        title: 'Appointment'
-    });
-});
-
-router.get('/service', (req, res) => {
-    res.render('service', {
-        title: 'Service'
-    });
-});
-
-router.get('/contact', (req, res) => {
-    res.render('contact', {
-        title: 'Contact'
-    });
-});
-
-router.get('/doctors', (req, res) => {
-    res.render('doctors', {
-        title: 'Doctors'
-    });
-});
-
-router.get('/about', (req, res) => {
-    res.render('about', {
-        title: 'About'
-    });
-});
-
-router.get('/admin', (req, res) => {
-    res.render('admin', {
-        title: 'Admin'
-    });
-});
-
 
 module.exports = router;

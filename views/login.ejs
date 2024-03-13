@@ -2,25 +2,28 @@
 <html lang="en">
     <head>
         <%-include('../src/components/head');%>
-        <link rel="stylesheet" href="../stylesheets/login.css" />
+        <link rel="stylesheet"  href="../stylesheets/login.css" />
 
         <title><%= title%></title>
+        <script defer src="../JS/login.js"></script>
+
     </head>
     <body>
         <%- include('../src/components/nav')%>
         <div class="container mt-5">
             <h2 class="mb-4 text-center">Doctor Login</h2>
-
-            <form>
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input
-                        type="text"
+                        type="email"
                         class="form-control"
                         id="username"
-                        placeholder="Enter your username"
-                        required
+                        placeholder="Enter your Email"
+                       
                     />
+                    <div id="usernameNull" class="invalid-feedback">Enter Username</div>
+                    <div id="usernameValidation" class="invalid-feedback">Invalid Username</div>
                 </div>
 
                 <div class="form-group">
@@ -30,14 +33,16 @@
                         class="form-control"
                         id="password"
                         placeholder="Enter your password"
-                        required
                     />
+                    <div id="passwordNULL" class="invalid-feedback">Enter Password</div>
                 </div>
 
-                <div class="w-100">
+                <div class="w-100 d-flex flex-column justify-content-around align-items-center">
                     <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="./signup" id="signupLink">Sign Up</a>
                 </div>
             </form>
+            
         </div>
     </body>
 </html>
