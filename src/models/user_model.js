@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
         gender: String,
         age: Number,
         role: String,
+        password : String,
 })
 
 const User = mongoose.model('user',userSchema,);

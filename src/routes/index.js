@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const connectDB = require('../db/db.js')
 const User = require('../../src/models/user_model.js')
+const authentication = require('../middleware/authentication.js')
+const userauthentication = require('../middleware/userauthentication.js')
 
 connectDB()
 
@@ -22,6 +24,11 @@ router.get("/login", (req, res) => {
     });
 });
 
+router.post('/logindata', authentication,(req,res) => {
+    res.render("login",{
+        title : "logindata"
+    })
+});
 router.get("/booking", (req, res) => {
     res.render("booking", {
         title: "Book Appointment",
@@ -68,7 +75,7 @@ router.get("/signup", (req, res) => {
         title: "Sign Up",
     });
 });
-router.post("/signup", async (req, res) => {
+router.post("/signup",userauthentication, async (req, res) => {
   
     let newUser = new User({
         name : req.body.name,
@@ -77,7 +84,7 @@ router.post("/signup", async (req, res) => {
         gender : req.body.gender,
         age : req.body.age,
         role : req.body.role,
-
+        password : req.body.confirm_password
     });
     try {
        const user =  await newUser.save();

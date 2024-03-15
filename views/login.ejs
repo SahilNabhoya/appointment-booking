@@ -5,14 +5,15 @@
         <link rel="stylesheet"  href="../stylesheets/login.css" />
 
         <title><%= title%></title>
-        <script defer src="../JS/login.js"></script>
+        <!-- <script defer src="../JS/login.js"></script> -->
 
     </head>
     <body>
         <%- include('../src/components/nav')%>
-        <div class="container mt-5">
+        <div class="container mt-5" >
             <h2 class="mb-4 text-center">Doctor Login</h2>
-            <form id="loginForm">
+            <form id="loginForm" method="post" action="/logindata">
+                
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input
@@ -20,10 +21,10 @@
                         class="form-control"
                         id="username"
                         placeholder="Enter your Email"
-                       
+                        name="username"
                     />
-                    <div id="usernameNull" class="invalid-feedback">Enter Username</div>
-                    <div id="usernameValidation" class="invalid-feedback">Invalid Username</div>
+                    <!-- <div id="usernameNull" class="invalid-feedback">Enter Username</div> -->
+                    <!-- <div id="usernameValidation" class="invalid-feedback">Invalid Username</div> -->
                 </div>
 
                 <div class="form-group">
@@ -32,9 +33,10 @@
                         type="password"
                         class="form-control"
                         id="password"
+                        name="password"
                         placeholder="Enter your password"
                     />
-                    <div id="passwordNULL" class="invalid-feedback">Enter Password</div>
+                    <!-- <div id="passwordNULL" class="invalid-feedback">Enter Password</div> -->
                 </div>
 
                 <div class="w-100 d-flex flex-column justify-content-around align-items-center">
