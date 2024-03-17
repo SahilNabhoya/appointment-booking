@@ -1,4 +1,16 @@
+function toggleSignupForm() {
+    var userType = document.querySelector('input[name="userType"]:checked').value;
+    var doctorSignupForm = document.getElementById('doctorSignupForm');
+    var patientSignupForm = document.getElementById('patientSignupForm');
 
+    if (userType === 'doctor') {
+        doctorSignupForm.style.display = 'block';
+        patientSignupForm.style.display = 'none';
+    } else if (userType === 'patient') {
+        doctorSignupForm.style.display = 'none';
+        patientSignupForm.style.display = 'block';
+    }
+}
 // Get form element and form fields
 const form = document.getElementById('signup-form');
 const nameField = document.getElementById('name');
@@ -6,12 +18,13 @@ const emailField = document.getElementById('email');
 const contactField = document.getElementById('contact');
 const genderField = document.getElementById('gender');
 const ageField = document.getElementById('age');
+const experience = document.getElementById('experience');
 const roleField = document.getElementById('role');
 const passwordField = document.getElementById('password');
 const confirmPasswordField = document.getElementById('confirm_password');
 
 // Add event listener to form submission
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', function (event) {
     // Check name field
     if (nameField.value === '') {
         alert('Please enter your name.');
@@ -46,13 +59,12 @@ form.addEventListener('submit', function(event) {
         event.preventDefault();
         return;
     }
-
-    // Check role field
-    if (roleField.value === '') {
-        alert('Please select your role.');
+    if (!isValidAge(experience.value)) {
+        alert('Please enter a valid experience.');
         event.preventDefault();
         return;
     }
+
 
     // Check password field
     if (passwordField.value === '') {
@@ -95,4 +107,5 @@ function isValidAge(age) {
     // Age should be a number between 0 and 100
     return !isNaN(age) && parseInt(age) >= 0 && parseInt(age) <= 100;
 }
+
 

@@ -7,9 +7,9 @@ const userSchema = new mongoose.Schema({
         gender: String,
         age: Number,
         role: String,
-        password : String,
+        password: String,
 })
 
-const User = mongoose.model('user',userSchema,);
+const User = mongoose.model('user', userSchema,);
 
 module.exports = User
