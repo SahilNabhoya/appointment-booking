@@ -4,10 +4,22 @@ const User = require('../../src/models/user_model.js')
 const authentication = require('../middleware/authentication.js')
 const userauthentication = require('../middleware/userauthentication.js');
 const doctors = require("../middleware/doctors.js");
+const cookie = require('cookie-parser');
+const crypto = require('crypto');
+const cookieParser = require("cookie-parser");
+const { isAuth } = require("../middleware/is-Auth.js");
+
 
 connectDB()
 
-router.get("/", (req, res) => {
+
+router.use(cookieParser());
+function genertesessionID() {
+    const buffer = crypto.randomBytes(16);
+    const sessionID = buffer.toString('hex');
+    return sessionID;
+}
+router.get("/",(req, res) => {
     res.render("home", {
         title: "Home ",
     });
@@ -25,15 +37,25 @@ router.get("/login", (req, res) => {
     res.render("login", {
         title: "Login",
     });
+   
 });
 router.post('/logindata', authentication, (req, res) => {
-    res.render("login", {
-        title: "logindata"
-    })
+   
+    if (req.login) {
+        const sessionId = genertesessionID();
+        res.cookie('sessionID',sessionId,{maxAge : 3600000});
+        console.log(res.getHeaders());
+        // res.render("login", {
+        //     title: "logindata"
+        // });
+        res.redirect('/home');
+    }else{
+        res.redirect('/login');
+    }
 });
 
 // Booking
-router.get("/booking", (req, res) => {
+router.get("/booking",isAuth, (req, res) => {
     res.render("booking", {
         title: "Book Appointment",
     });
