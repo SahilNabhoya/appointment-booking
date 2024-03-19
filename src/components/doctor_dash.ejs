@@ -1,0 +1,45 @@
+
+<div class="myAppointments">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Doctor - Appointments</h2>
+        <!-- Doctor's Details Section -->
+        <div class="mb-4">
+            <h3 >Dr. <span id="name"><%= user.name%></span></h3>
+            <p>Specialty: Physiotherapy</p>
+            <p>Contact: <span id="number"><%= user.contact%></span></p>
+        </div>
+
+        <!-- Doctor's Appointments Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Appointment ID</th>
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">Appointment Time</th>
+                        <th scope="col">Contact Number</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Add doctor's appointments dynamically here -->
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>John Doe</td>
+                        <td>Morning</td>
+                        <td>123-456-7890</td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jane Smith</td>
+                        <td>Afternoon</td>
+                        <td>987-654-3210</td>
+                        <!-- Add more rows for each appointment -->
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

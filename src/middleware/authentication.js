@@ -12,7 +12,6 @@ const authentication = async (req, res, next) => {
     } else {
         if (user.password == password) {
             req.login = true;
-            // res.redirect('/home');
         } else {
             console.log("Incorrect Password");
         }
@@ -21,7 +20,6 @@ const authentication = async (req, res, next) => {
 }
 
 
-// module.exports.login=login;
 module.exports=authentication;
 
 

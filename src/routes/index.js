@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const connectDB = require('../db/db.js')
 const User = require('../../src/models/user_model.js')
+const Appointment = require('../../src/models/apoointment_model.js');
 const authentication = require('../middleware/authentication.js')
 const userauthentication = require('../middleware/userauthentication.js');
 const doctors = require("../middleware/doctors.js");
@@ -8,6 +9,8 @@ const cookie = require('cookie-parser');
 const crypto = require('crypto');
 const cookieParser = require("cookie-parser");
 const { isAuth } = require("../middleware/is-Auth.js");
+const { usertype } = require("../middleware/usertype.js");
+const { log } = require("console");
 
 
 connectDB()
@@ -40,22 +43,32 @@ router.get("/login", (req, res) => {
    
 });
 router.post('/logindata', authentication, (req, res) => {
-   
+    
     if (req.login) {
         const sessionId = genertesessionID();
-        res.cookie('sessionID',sessionId,{maxAge : 3600000});
-        console.log(res.getHeaders());
-        // res.render("login", {
-        //     title: "logindata"
-        // });
-        res.redirect('/home');
+        const option = {
+            httpOnly : true,
+            secure:true
+        }
+        res.cookie('sessionID',sessionId,{maxAge : 60000},option);
+        res.cookie('username',req.body.username );
+        res.redirect('/dashbord');
     }else{
         res.redirect('/login');
     }
 });
 
+// Dashbord
+router.get("/dashbord",usertype, (req, res) => {
+    res.render("dashbord",{
+        isvalidrole : req.type,
+        user:req.user
+
+    });
+    // console.log(req.user);
+});
 // Booking
-router.get("/booking",isAuth, (req, res) => {
+router.get("/booking", (req, res) => {
     res.render("booking", {
         title: "Book Appointment",
     });
@@ -109,6 +122,25 @@ router.get("/signup", (req, res) => {
     res.render("signup", {
         title: "Sign Up",
     });
+});
+
+
+router.post("/book",async(req,res)=>{
+    console.log(req.body);
+    let new_Apoointment = new Appointment({
+        name : req.body.name,
+        contact : req.body.phone,
+        date : req.body.date,
+        time :  req.body.timezone,
+        doctor_name :  req.body.doctor
+    });
+    try {
+        const appointment = await new_Apoointment.save();
+        console.log("APoointment Booked",appointment);
+        res.redirect('/dashbord');
+    } catch (error) {
+        console.log(error);
+    }
 });
 router.post("/signup", userauthentication, async (req, res) => {
 
