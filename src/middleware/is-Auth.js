@@ -1,8 +1,9 @@
-exports.isAuth = (req,res,next) => {
-    if(req.cookies.sessionID){
+const isAuth = (req, res, next) => {
+    if (req.cookies.sessionID) {
         next();
-    }
-    else{
+    } else {
         res.redirect("/login");
     }
-}
+};
+
+export default isAuth;

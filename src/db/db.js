@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 const MONGODB_URL =
     "mongodb+srv://shineshore1612:Shine_1612@appointment.uyt9hhh.mongodb.net";
@@ -14,5 +15,5 @@ const DB_NAME = "LifeCare";
 };
 
 
-module.exports = connectDB
-// module.exports = userSchema;
+// module.exports = connectDB
+export default connectDB;

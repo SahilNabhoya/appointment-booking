@@ -3,8 +3,9 @@
     <head>
         <%- include('../src/components/head'); %>
         <link rel="stylesheet" href="../stylesheets/doctors.css" />
-        <script defer src="../JS/doctors.js"></script>
-        <title><%= title %></title>
+        <!-- <script defer src="../JS/doctors.js"></script> -->
+        <title>Doctors</title>
+        
     </head>
 
     <body>
@@ -16,7 +17,8 @@
                 <% doctor.forEach(function(doctor){ %>
                 <div class="doctor">
                     <h2><%= doctor.name %></h2>
-                    <p>Email : <%= doctor.email%></p>
+                    <p>Specility : <%= doctor.spciality%></p>
+                    <p>Experience : <%= doctor.experience%> Years</p>
                 </div>
                 <%});%>
             </div>

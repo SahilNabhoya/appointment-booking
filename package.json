@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "It is for doctor's appointment booking system management",
     "main": "index.js",
+    "type": "module",
     "scripts": {
         "dev": "nodemon server.js",
         "start": "node server.js"

@@ -2,73 +2,100 @@
 <html lang="en">
 
 <head>
-    <%-include('../src/components/head');%>
-        <link rel="stylesheet" href="../stylesheets/booking.css" />
-        <title>
-            <%= title%>
-        </title>
-        <!-- <script defer src="../JS/booking.js"></script> -->
+    <%- include('../src/components/head'); %>
+        <link rel="stylesheet" href="/stylesheets/booking.css" />
+        <title>Book Appointment</title>
 </head>
 
 <body>
-    <!-- <%- include('../src/components/nav')%> -->
-        <div class="container mt-5">
-            <h2 class="mb-4 text-center">Book an Appointment</h2>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Book an Appointment</h2>
 
-            <!-- Appointment Form -->
-            <form
-            id="booking-form" 
-            method="post"
-            novalidate
-            action="/book">
-                <!-- User Details -->
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name"
-                        required />
-                </div>
+        <!-- Appointment Form -->
+        <form id="booking-form" method="post" novalidate action="/book">
+            <!-- User Details -->
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}"
-                        placeholder="Enter your phone number" required />
-                </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}"
+                    placeholder="Enter your phone number" required />
+            </div>
 
-                <div class="form-group">
-                    <label for="date">Select Date : </label>
-                    <input type="date" name="date" id="date" required>
-                </div>
-                <!-- Appointment Time Selection -->
-                <div class="form-group">
-                    <label for="appointmentTime">Select Appointment Time</label>
-                    <select class="form-control" id="appointmentTime" name="timezone" required>
-                        <option value="morning">Morning</option>
-                        <option value="afternoon">Afternoon</option>
-                        <option value="evening">Evening</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="date">Select Date : </label>
+                <input type="date" name="date" id="date" required />
+            </div>
+            <!-- Appointment Time Selection -->
+            <div class="form-group">
+                <label for="appointmentTime">Select Appointment Time</label>
+                <select class="form-control" id="appointmentTime" name="timezone" required>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                </select>
+            </div>
+
+            <!-- Avabile doctors -->
+            <div class="form-group">
+                <label for="doctor">Select Doctor</label>
+                <select class="form-control" id="doctor" name="doctor" required>
+                    <!-- Add available doctors dynamically here -->
+                    <!-- <option value="">Select</option> -->
+                    <!-- <option value="john-doe">Dr. John Doe</option>
+                    <option value="jane-smith">Dr. Jane Smith</option>
+                    <option value="Dara Kelley">Dr. Dara Kelley</option> -->
+                    <!-- Add more available doctors as needed -->
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary" onclick="return submit()">
+                Book Appointment
+            </button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const appointmentTimeSelect = document.getElementById('appointmentTime');
+            const appointmentDateSelect = document.getElementById('date');
+            const doctorSelect = document.getElementById('doctor');
+
+            // // Add event listener for changes in the appointment time selection
+            appointmentDateSelect.addEventListener('change', function () {
+                appointmentTimeSelect.addEventListener('change', function () {
+                    const selectedTimezone = appointmentTimeSelect.value;
+                    const selectedDate = appointmentDateSelect.value;
 
 
-                <!-- Avabile doctors -->
-                <div class="form-group">
-                    <label for="doctor">Select Doctor</label>
-                    <select class="form-control" id="doctor" name="doctor" required>
-                        <!-- Add available doctors dynamically here -->
-                        <option value="john-doe">Dr. John Doe</option>
-                        <option value="jane-smith">Dr. Jane Smith</option>
-                        <!-- Add more available doctors as needed -->
-                    </select>
-                </div>
+                    // Fetch available doctors based on the selected time zone
+                    fetch(`/available-doctors?date=${selectedDate}&time=${selectedTimezone}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Clear previous options from the doctor dropdown/select
+                            doctorSelect.innerHTML = '<option value="">Select</option>';
 
-
-
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">
-                    Book Appointment
-                </button>
-            </form>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+                            // Add new options for available doctors to the doctor dropdown/select
+                            data.forEach(doctorName  => {
+                                const option = document.createElement('option');
+                                option.text = doctorName ;
+                                // option.value = doctor._id; // Assuming doctor._id is used as the value
+                                option.value = doctorName ; // Assuming doctor._id is used as the value
+                                doctorSelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching available doctors:', error);
+                        });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

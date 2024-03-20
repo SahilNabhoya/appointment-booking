@@ -1,20 +1,18 @@
-const User = require('../models/user_model');
+import User from '../models/user_model.js';
+import Doctor from '../models/doctor_model.js';
 
 const userauthentication = async(req,res,next)=>{
     try {
         const email = req.body.email;
         const user = await User.findOne({email : email});
+        const doctor = await Doctor.findOne({email : email});
     
-        if (user) {
-            window.alert('User already exists'); // Set a flash message
-            return res.redirect('/signup'); 
+        if (user || doctor) {
+            return res.send('<script>alert("User already exists"); window.location.href = "/signup";</script>'); 
         }
-        console.log("hsdcahsdvc");
         next();
     } catch (error) {
         console.log(error);
     }
-   
 }
-
-module.exports = userauthentication;
+export default userauthentication;

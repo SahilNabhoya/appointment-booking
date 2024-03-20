@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <%-include('../src/components/head')%>
-        <title><%= title%></title>
+        <title>Sign Up</title>
 
         <link rel="stylesheet" href="../stylesheets/signup.css" />
         <script defer src="../JS/signup.js"></script>
@@ -13,7 +13,7 @@
             <div class="form-container">
                 <h2 class="text-center">Sign Up</h2>
 
-                <!-- <form>
+                <form>
                     <label
                         ><input
                             type="radio"
@@ -32,149 +32,25 @@
                         />
                         Patient</label
                     >
-                </form> -->
+                </form>
 
                 <!-- Doctor Signup Form -->
-                <!-- <form id="doctorSignupForm" style="display: none" method="post" novalidate action="/doctor-signup">
-                    <%- include('../src/components/dr_signup')%>
-                </form> -->
+                <form id="doctorSignupForm" style="display: none" method="post" novalidate action="/doctor-signup">
+                    <%- include('../src/components/signup_doctor')%>
+                </form>
 
                 <!-- Patient Signup Form -->
-                <!-- <form
+                <form
                     id="patientSignupForm"
                     style="display: none"
                     method="post"
                     novalidate
                     action="/patient-signup"
                 >
-                    <%- include('../src/components/user_signup')%>
-                </form> -->
-
-                <form
-                    id="signup-form"
-                    method="post"
-                    novalidate
-                    action="/signup"
-                >
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="name"
-                            name="name"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please enter your name.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="email"
-                            name="email"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please enter a valid email address.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact">Contact No.:</label>
-                        <input
-                            type="tel"
-                            class="form-control"
-                            id="contact"
-                            name="contact"
-                            pattern="[0-9]{10}"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please enter a 10-digit contact number.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="gender">Gender:</label>
-                        <select
-                            class="form-control"
-                            id="gender"
-                            name="gender"
-                            required
-                        >
-                            <option value="">Select</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select your gender.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="age">Age:</label>
-                        <input
-                            type="number"
-                            class="form-control"
-                            id="age"
-                            name="age"
-                            min="0"
-                            max="100"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please enter your age
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Are you a doctor or a patient?</label>
-                        <select
-                            class="form-control"
-                            id="role"
-                            name="role"
-                            required
-                        >
-                            <option value="">Select</option>
-                            <option value="doctor">Doctor</option>
-                            <option value="patient">Patient</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select your role.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input
-                            type="password"
-                            class="form-control"
-                            id="password"
-                            name="password"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please enter a password.
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm_password">Confirm Password:</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="confirm_password"
-                            name="confirm_password"
-                            required
-                        />
-                        <div class="invalid-feedback">
-                            Please confirm your password.
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            submit
-                        </button>
-                    </div>
+                    <%- include('../src/components/signup_patient')%>
                 </form>
+
+               
             </div>
         </div>
 

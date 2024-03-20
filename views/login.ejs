@@ -4,9 +4,7 @@
         <%-include('../src/components/head');%>
         <link rel="stylesheet"  href="../stylesheets/login.css" />
 
-        <title><%= title%></title>
-        <!-- <script defer src="../JS/login.js"></script> -->
-
+        <title>Log In</title>
     </head>
     <body>
         <%- include('../src/components/nav')%>
@@ -40,7 +38,7 @@
                 </div>
 
                 <div class="w-100 d-flex flex-column justify-content-around align-items-center">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary" onsubmit="submit()">Login</button>
                     <a href="./signup" id="signupLink">Sign Up</a>
                 </div>
             </form>
