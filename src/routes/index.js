@@ -1,17 +1,23 @@
-// const router = require("express").Router();
+
 import { Router } from "express";
 const router = Router();
+import { randomBytes}  from 'crypto';
+import cookieParser from "cookie-parser";
+
+// DATABASE
 import connectDB from '../db/db.js';
+
+// MODELS
 import User from '../../src/models/user_model.js';
 import Doctor from '../../src/models/doctor_model.js';
 import Appointment from '../../src/models/apoointment_model.js';
+
+// MIDDLEWARES
 import authentication from '../middleware/authentication.js';
 import userauthentication from '../middleware/userauthentication.js';
 import doctors from "../middleware/doctors.js";
-import { randomBytes}  from 'crypto';
-import cookieParser from "cookie-parser";
-// import { isAuth } from "../middleware/is-Auth.js";
 import usertype  from "../middleware/usertype.js";
+// import appointmentdata from "../middleware/appointmentdata.js";
 
 
 connectDB()
@@ -42,13 +48,25 @@ router.get("/dashbord",usertype, (req, res) => {
         user:req.user
     });
 });
+router.get("/appointmentData",async(req,res)=>{
+    const type=req.query.type;
+    const name=req.query.name;
+    if (type=='doctor') {
+        const appointment = (await Appointment.find({doctor_name:name})).map(appointment=>appointment);
+        res.json(appointment);
+    }else{
+        const appointment = (await Appointment.find({name:name})).map(appointment=>appointment);
+        res.json(appointment);
+    }
+})
 
 // Book Appointment
 router.get("/booking", (req, res) => {
     res.render("booking");
 });
 router.post("/book",async(req,res)=>{
-    let new_Apoointment = new Appointment({
+
+     let new_Apoointment = new Appointment({
         name : req.body.name,
         contact : req.body.phone,
         date : req.body.date,
@@ -72,12 +90,12 @@ router.get('/available-doctors', async(req,res)=>{
         const required_doctors = await Appointment.find({date:date,time:time});
         
         
-        const doctor_name = (await doctors).map(doctors=>doctors.name);
-        const requiredDoctors = (await required_doctors).map(appointment=>appointment.doctor_name);
-        console.log('\nDoctor array : '+doctor_name,'\nBooked Doctors : '+requiredDoctors);
+        const doctor_name = doctors.map(doctors=>doctors.name);
+        const requiredDoctors = required_doctors.map(appointment=>appointment.doctor_name);
+        // console.log('\nDoctor array : '+doctor_name,'\nBooked Doctors : '+requiredDoctors);
         
         const available_doctors = doctor_name.filter(doctor=>!requiredDoctors.includes(doctor));
-        console.log("available doctors : "+available_doctors);
+        // console.log("available doctors : "+available_doctors);
 
         res.json(available_doctors);
     } catch (error) {

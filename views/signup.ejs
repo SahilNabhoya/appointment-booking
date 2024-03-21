@@ -1,59 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <%-include('../src/components/head')%>
+
+<head>
+    <%-include('.. /src/components/head')%>
         <title>Sign Up</title>
 
         <link rel="stylesheet" href="../stylesheets/signup.css" />
         <script defer src="../JS/signup.js"></script>
-    </head>
+</head>
 
-    <body>
-        <div class="container">
-            <div class="form-container">
-                <h2 class="text-center">Sign Up</h2>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="text-center">Sign Up</h2>
 
-                <form>
-                    <label
-                        ><input
-                            type="radio"
-                            name="userType"
-                            value="doctor"
-                            onchange="toggleSignupForm()"
-                        />
-                        Doctor</label
-                    >
-                    <label
-                        ><input
-                            type="radio"
-                            name="userType"
-                            value="patient"
-                            onchange="toggleSignupForm()"
-                        />
-                        Patient</label
-                    >
-                </form>
+            <form>
+                <label><input type="radio" name="userType" value="doctor" onchange="toggleSignupForm()" />
+                    Doctor</label>
+                <label><input type="radio" name="userType" value="patient" onchange="toggleSignupForm()" />
+                    Patient</label>
+            </form>
 
-                <!-- Doctor Signup Form -->
-                <form id="doctorSignupForm" style="display: none" method="post" novalidate action="/doctor-signup">
-                    <%- include('../src/components/signup_doctor')%>
-                </form>
+            <!-- Doctor Signup Form -->
+            <form id="doctorSignupForm" style="display: none" method="post" novalidate action="/doctor-signup">
+                <%- include('../src/components/signup_doctor')%>
+            </form>
 
-                <!-- Patient Signup Form -->
-                <form
-                    id="patientSignupForm"
-                    style="display: none"
-                    method="post"
-                    novalidate
-                    action="/patient-signup"
-                >
-                    <%- include('../src/components/signup_patient')%>
-                </form>
+            <!-- Patient Signup Form -->
+            <form id="patientSignupForm" style="display: none" method="post" novalidate action="/patient-signup">
+                <%- include('../src/components/signup_patient')%>
+            </form>
+            <!-- <script>
+                var submit = document.getElementById('patientSignupForm');
+                submit.addEventListner('submit', function () {
+                    fetch("/patient-signup").then(response => response.json())
+                        .then(data => {
+                            if (data.message === true) {
+                                alert("Welcome to the Lifecare :)");
+                                window.location.href = "/login"
+                            }
+                        })
+                    });
 
-               
-            </div>
+            </script> -->
+
         </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script>
+
+
+    </script>
+</body>
+
 </html>

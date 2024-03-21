@@ -2,23 +2,111 @@
 <html lang="en">
 
 <head>
-    <%-include('../src/components/head');%>
+    <%- include('../src/components/head'); %>
         <title>Dashbord</title>
         <link rel="stylesheet" href="../stylesheets/dashbord.css" />
 </head>
 
 <body>
-   
-    <% if (isvalidrole === 'doctor') { %>
+
+    <% if (isvalidrole==='doctor' ) { %>
         <!-- Show doctor-specific content -->
         <div id="doctor">
             <%- include('../src/components/dashbord_doctor')%>
         </div>
-       
-    <% } else { %>
-        <!-- Show patient-specific content -->
-        <%- include('../src/components/dashbord_patient')%> 
-    <% } %>
+
+        <% } else { %>
+            <!-- Show patient-specific content -->
+            <%- include('../src/components/dashbord_patient')%>
+                <% } %>
+                    <script>
+                        var isvalidrole = '<%=isvalidrole%>';
+                        var name = '<%=user.name%>';
+                        var appointment_table = document.getElementById('appointment_table')
+                        document.addEventListener('DOMContentLoaded', function () {
+                            fetch(`/appointmentData?name=${name}&type=${isvalidrole}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    // let count=0;
+                                    if (isvalidrole == 'doctor') {
+                                        let count = 0;
+                                        appointment_table.innerHTML = `<thead>
+                                                                        <tr>
+                                                                            <th>Sr No.</th>
+                                                                            <th scope="col">Patient Name</th>
+                                                                            <th scope="col">Appointment Date</th>
+                                                                            <th scope="col">Appointment Time</th>
+                                                                            <th scope="col">Contact Number</th>
+                                                                            <th scope="col">Status</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>`;
+                                        data.forEach(user => {
+                                            count++;
+                                            const tr = document.createElement('tr');
+                                            let th = document.createElement('th');
+                                            let td1 = document.createElement('td');
+                                            let td2 = document.createElement('td');
+                                            let td3 = document.createElement('td');
+                                            let td4 = document.createElement('td');
+                                            let td5 = document.createElement('td');
+                                            th.innerText = count;
+                                            td1.innerText = user.name;
+                                            td2.innerText = user.date;
+                                            td3.innerText = user.time;
+                                            td4.innerText = user.contact;
+                                            td5.innerHTML = `<select class="form-select" name="visit" id="visit">
+                                                                <option value="Visited">Visited</option>
+                                                                <option value="Cancled">Cancled</option>
+                                                            </select>`;
+                                            tr.appendChild(th);
+                                            tr.appendChild(td1);
+                                            tr.appendChild(td2);
+                                            tr.appendChild(td3);
+                                            tr.appendChild(td4);
+                                            tr.appendChild(td5);
+                                            appointment_table.appendChild(tr);
+                                        });
+                                    }
+                                    else {
+                                        let count = 0;
+                                        appointment_table.innerHTML = `<thead class="thead-dark">
+                                                                        <tr>
+                                                                            <th>Sr. No.</th>
+                                                                            <th scope="col">Doctor Name</th>
+                                                                            <th scope="col">Appointment Date</th>
+                                                                            <th scope="col">Appointment Time</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>`;
+                                        data.forEach(user => {
+                                            count++;
+                                            const tr = document.createElement('tr');
+                                            let th = document.createElement('th');
+                                            let td1 = document.createElement('td');
+                                            let td2 = document.createElement('td');
+                                            let td3 = document.createElement('td');
+                                            let td4 = document.createElement('td');
+                                            th.setAttribute("scope", "row");
+                                            th.innerText = count;
+                                            td1.innerText = user.doctor_name;
+                                            td2.innerText = user.date;
+                                            td3.innerText = user.time;
+                                            td4.innerHTML = `<div class="texxt-center d-flex justify-content-center">
+                                                                <button type=button class="btn btn-primary" id="cancle">Cancle</button>
+                                                            </div>`;
+                                            tr.appendChild(th);
+                                            tr.appendChild(td1);
+                                            tr.appendChild(td2);
+                                            tr.appendChild(td3);
+                                            tr.appendChild(td4);
+                                            appointment_table.appendChild(tr);
+                                        });
+                                    }
+
+                                });
+                        });
+                    </script>
 </body>
 
 </html>

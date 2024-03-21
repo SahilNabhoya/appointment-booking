@@ -1,4 +1,3 @@
-// const User = require('../models/user_model');
 import User from '../models/user_model.js';
 import Doctor from '../models/doctor_model.js';
 
