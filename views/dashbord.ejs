@@ -22,9 +22,11 @@
                     <script>
                         var isvalidrole = '<%=isvalidrole%>';
                         var name = '<%=user.name%>';
+                        var id = '<%=user._id.toString()%>'
+                        // console.log("Id : ",id);
                         var appointment_table = document.getElementById('appointment_table')
                         document.addEventListener('DOMContentLoaded', function () {
-                            fetch(`/appointmentData?name=${name}&type=${isvalidrole}`)
+                            fetch(`/appointmentData?id=${id}&type=${isvalidrole}`)
                                 .then(response => response.json())
                                 .then(data => {
                                     // let count=0;

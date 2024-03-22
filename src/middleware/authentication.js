@@ -9,7 +9,6 @@ const authentication = async (req, res, next) => {
     req.login = false;
     const user = await User.findOne({ email: username });
     const doctor = await Doctor.findOne({ email: username });
-
     if (!username || !password) {
         return res.send(
             '<script>alert("Enter Username And Password");</script>'
@@ -20,7 +19,9 @@ const authentication = async (req, res, next) => {
         } else {
             if (user && user.password === password) {
                 req.login = true;
+                req.user = user;
             } else if (doctor && doctor.password === password) {
+                req.user = doctor;
                 req.login = true;
             } else {
                return  console.log("Incorrect Password");

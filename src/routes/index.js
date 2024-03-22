@@ -17,7 +17,7 @@ import authentication from '../middleware/authentication.js';
 import userauthentication from '../middleware/userauthentication.js';
 import doctors from "../middleware/doctors.js";
 import usertype  from "../middleware/usertype.js";
-// import appointmentdata from "../middleware/appointmentdata.js";
+import { log } from "console";
 
 
 connectDB()
@@ -50,12 +50,13 @@ router.get("/dashbord",usertype, (req, res) => {
 });
 router.get("/appointmentData",async(req,res)=>{
     const type=req.query.type;
-    const name=req.query.name;
+    const id=req.query.id;
+    
     if (type=='doctor') {
-        const appointment = (await Appointment.find({doctor_name:name})).map(appointment=>appointment);
+        const appointment = (await Appointment.find({_id:id})).map(appointment=>appointment);
         res.json(appointment);
     }else{
-        const appointment = (await Appointment.find({name:name})).map(appointment=>appointment);
+        const appointment = (await Appointment.find({_id:id})).map(appointment=>appointment);
         res.json(appointment);
     }
 })
@@ -65,14 +66,18 @@ router.get("/booking", (req, res) => {
     res.render("booking");
 });
 router.post("/book",async(req,res)=>{
-
+    // console.log("Req user",req.session.user);
+    // console.log("\nReq ",req.body);
      let new_Apoointment = new Appointment({
+        user_id : req.session.user.user_id.toString(),
         name : req.body.name,
         contact : req.body.phone,
         date : req.body.date,
         time :  req.body.timezone,
-        doctor_name :  req.body.doctor
+        doctor_name : req.body.doctor
+        // doctor_id :  req.body.doctor
     });
+    // console.log("\nNEW appointent",new_Apoointment);
     try {
         const appointment = await new_Apoointment.save();
         console.log("Apoointment Booked");
@@ -90,13 +95,27 @@ router.get('/available-doctors', async(req,res)=>{
         const required_doctors = await Appointment.find({date:date,time:time});
         
         
+        // const doctor_name = doctors.map(doctors=>doctors._id);
         const doctor_name = doctors.map(doctors=>doctors.name);
+        // const requiredDoctors = required_doctors.map(appointment=>appointment.doctor_id);
         const requiredDoctors = required_doctors.map(appointment=>appointment.doctor_name);
-        // console.log('\nDoctor array : '+doctor_name,'\nBooked Doctors : '+requiredDoctors);
+        // console.log('\nDoctor array : ',doctor_name,'\nBooked Doctors : ',requiredDoctors);
         
         const available_doctors = doctor_name.filter(doctor=>!requiredDoctors.includes(doctor));
-        // console.log("available doctors : "+available_doctors);
+        // let availabites = [];
+        // available_doctors.forEach(doc_id=>{
+        //     let  doctor = doctors.find(doc=>doc._id===doc_id);
+        //     if (doctor) {
+        //         availabites.push({
+        //             id : doc_id.toString(),
+        //             name : doctor.name
+        //         });
+        //     }
+        // })
+        // console.log("\navailable doctors : ",available_doctors);
+        // console.log("\navaibilites : ",availabites);
 
+        // res.json(availabites);
         res.json(available_doctors);
     } catch (error) {
         console.log(error);
@@ -183,12 +202,14 @@ router.get("/login", (req, res) => {
 router.post('/logindata', authentication, (req, res) => {  
     if (req.login) {
         const sessionId = genertesessionID();
-        const option = {
-            httpOnly : true,
-            secure:true
+        res.cookie('sessionID',sessionId);
+        // res.cookie('username',req.body.username );
+       
+        // res.cookie('userID',)
+        req.session.user={
+            user_id : req.user._id.toString(),
+            email : req.user.email
         }
-        res.cookie('sessionID',sessionId,{maxAge : 60000},option);
-        res.cookie('username',req.body.username );
         res.redirect('/dashbord');
     }else{
         res.redirect('/login');
@@ -197,9 +218,16 @@ router.post('/logindata', authentication, (req, res) => {
 
 // Logout
 router.get('/logout',(req,res)=>{
-    res.clearCookie('username');
+    req.session.destroy( err=> {
+        if (err) {
+            console.log(err);
+        }else{
+            res.redirect('/home');
+        }
+    })
+    // res.clearCookie('username');
     res.clearCookie('sessionID');
-    res.redirect('/home');
+    // res.redirect('/home');
 });
 
 export default router;

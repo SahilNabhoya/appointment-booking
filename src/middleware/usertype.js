@@ -2,9 +2,10 @@ import User from '../models/user_model.js';
 import Doctor from '../models/doctor_model.js';
 
 const usertype= async(req,res,next)=>{
-    const email = req.cookies.username;
-    const user = await User.findOne({email:email});
-    const doctor = await Doctor.findOne({email:email});
+    // const email = req.cookies.username;
+    let id = req.session.user.user_id;
+    const user = await User.findOne({_id:id});
+    const doctor = await Doctor.findOne({_id:id});
     if (user) {
         req.type = 'patient'
         req.user = user;

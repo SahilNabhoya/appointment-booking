@@ -7,14 +7,14 @@ const appointmentSchema = new mongoose.Schema({
     date: Date,
     time: String,
     doctor_name: String,
-    user_id  : {
+    user_id : {
         type : mongoose.Schema.Types.ObjectId,
         ref : 'user'
-    },
-    doctor_id : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'doctor'
-    },
+    }
+    // doctor_id : {
+    //     type : mongoose.Schema.Types.ObjectId,
+    //     ref : 'doctor'
+    // }
 });
 
 const Appointments = mongoose.model("appointments", appointmentSchema);
